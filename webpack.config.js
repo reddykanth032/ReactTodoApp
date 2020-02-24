@@ -1,14 +1,19 @@
-var webpack =require('webpack');
+var webpack = require('webpack');
+
 
 module.exports = {
-  entry: ['script!jquery/dist/jquery.min.js','script!foundation-sites/dist/foundation.min.js','./app/app.jsx'],
-  externals:{
-    jquery:'jQuery'
+  entry: [
+    'script!jquery/dist/jquery.min.js',
+    'script!foundation-sites/dist/foundation.min.js',
+    './app/app.jsx'
+  ],
+  externals: {
+    jquery: 'jQuery'
   },
-  plugins:[
+  plugins: [
     new webpack.ProvidePlugin({
-      '$':'jquery',
-      'jQuery':'jquery'
+      '$': 'jquery',
+      'jQuery': 'jquery'
     })
   ],
   output: {
@@ -17,13 +22,12 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
-    modulesDirectories:[
+    modulesDirectories: [
       'node_modules',
       './app/components'
     ],
     alias: {
-        applicationStyles:'app/styles/app.scss'
-
+      applicationStyles: 'app/styles/app.scss'
     },
     extensions: ['', '.js', '.jsx']
   },
@@ -39,5 +43,5 @@ module.exports = {
       }
     ]
   },
-  devtool:'cheap-module-eval-source-map'
+  devtool: 'cheap-module-eval-source-map'
 };
