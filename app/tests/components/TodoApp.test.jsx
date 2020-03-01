@@ -17,19 +17,45 @@ describe('TodoApp',()=>{
     todoApp.handleAddTodo(todoText);
 
     expect(todoApp.state.todos[0].text).toBe(todoText);
+    expect(todoApp.state.todos[0].createdAt).toBeA('number');
   });
 
   it('should toggle todo when we click on checkbox',()=>{
     var todos=[
       {id:11,
       text:'sleep',
-      completed:false}
+      completed:false,
+      createdAt:0,
+      completedAt:undefined
+    }
     ];
     var todoApp=TestUtils.renderIntoDocument(<TodoApp/>);
     todoApp.setState({todos:[...todos]});
     expect(todoApp.state.todos[0].completed).toBe(false);
+    expect(todoApp.state.todos[0].createdAt).toBeA('number');
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(true);
+    expect(todoApp.state.todos[0].completedAt).toBeA('number');
+
+  });
+
+  it('should toggle todo when we click on checkbox back to unchecked and update completedAt to undefined',()=>{
+    var todos=[
+      {id:11,
+      text:'sleep',
+      completed:false,
+      createdAt:0,
+      completedAt:undefined
+    }
+    ];
+    var todoApp=TestUtils.renderIntoDocument(<TodoApp/>);
+    todoApp.setState({todos:[...todos]});
+    todoApp.handleToggle(11);
+    expect(todoApp.state.todos[0].completed).toBe(true);
+    expect(todoApp.state.todos[0].completedAt).toBeA('number');
+    todoApp.handleToggle(11);
+    expect(todoApp.state.todos[0].completed).toBe(false);
+    expect(todoApp.state.todos[0].completedAt).toNotExist();
 
   });
 });
