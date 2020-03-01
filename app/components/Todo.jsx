@@ -6,12 +6,11 @@ var Todo = React.createClass({
     var renderDate=()=>{
       var message='Created At ';
       var timestamp=createdAt;
-      return message+moment.unix(timestamp).format('MMM Do YYYY @ h:mm:ss a');
       if(completed){
         message='Completed At';
         timestamp=completedAt;
       }
-
+      return message+moment.unix(timestamp).format('MMM Do YYYY @ h:mm:ss a');
     };
     return (
       <div onClick={() => {
